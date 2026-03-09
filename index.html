@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saigon Rolls — Website Concepts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0F0C08;
+    --cream: #F5EFE0;
+    --red: #C0392B;
+    --gold: #C49A3C;
+    --muted: rgba(245,239,224,0.4);
+    --border: rgba(245,239,224,0.08);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    padding: 72px 60px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 80px;
+  }
+
+  .from-badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(196,154,60,0.1);
+    border: 1px solid rgba(196,154,60,0.2);
+    padding: 8px 18px;
+    border-radius: 2px;
+  }
+
+  .date-stamp {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+  }
+
+  .hero-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .hero-label::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 6vw, 80px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 28px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 580px;
+    margin-bottom: 16px;
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 60px 0;
+  }
+
+  /* Concepts grid */
+  .concepts {
+    padding: 0 60px 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .concepts-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.02);
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .card:hover {
+    border-color: rgba(196,154,60,0.3);
+    transform: translateY(-4px);
+  }
+
+  /* Preview window */
+  .card-preview {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  /* Concept 1 preview — dark luxury */
+  .preview-1 {
+    background: #0E0B08;
+  }
+  .preview-1 .p-nav {
+    height: 40px;
+    background: rgba(14,11,8,0.95);
+    border-bottom: 1px solid rgba(200,151,58,0.15);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    justify-content: space-between;
+  }
+  .preview-1 .p-logo { font-family: 'Jost',sans-serif; font-size: 10px; letter-spacing: 0.3em; color: rgba(245,239,224,0.7); }
+  .preview-1 .p-btn { font-size: 8px; border: 1px solid rgba(200,151,58,0.5); color: rgba(200,151,58,0.8); padding: 3px 10px; border-radius: 1px; }
+  .preview-1 .p-hero {
+    padding: 24px 16px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .preview-1 .p-title { font-family: 'Playfair Display',serif; font-size: 28px; line-height: 1; color: rgba(245,239,224,0.9); font-style: italic; }
+  .preview-1 .p-accent { color: rgba(200,151,58,0.9); }
+  .preview-1 .p-sub { font-size: 7px; color: rgba(245,239,224,0.3); margin-top: 6px; line-height: 1.6; max-width: 120px; }
+  .preview-1 .p-cta { font-size: 7px; background: #C0392B; color: rgba(245,239,224,0.9); padding: 6px 14px; margin-top: 12px; display: inline-block; }
+  .preview-1 .p-circle {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 35% 35%, rgba(200,151,58,0.15), rgba(139,26,26,0.25));
+    border: 1px solid rgba(200,151,58,0.12);
+    flex-shrink: 0;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display',serif;
+    font-size: 32px;
+    font-style: italic;
+    color: rgba(200,151,58,0.3);
+  }
+  .p-eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.3em;
+    color: rgba(200,151,58,0.7);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* Concept 2 preview — bold editorial */
+  .preview-2 {
+    background: #FAFAF5;
+  }
+  .preview-2 .p-nav {
+    height: 36px;
+    background: #111008;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    justify-content: space-between;
+  }
+  .preview-2 .p-logo-2 { font-size: 11px; letter-spacing: 0.1em; color: white; font-weight: 600; }
+  .preview-2 .p-btn-2 { font-size: 7px; background: #D42B2B; color: white; padding: 4px 10px; }
+  .preview-2 .p-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: calc(100% - 36px);
+  }
+  .preview-2 .p-left {
+    background: #F5EED8;
+    padding: 16px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .preview-2 .p-big-title {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 0.9;
+    color: #111008;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .preview-2 .p-big-title .r { color: #D42B2B; }
+  .preview-2 .p-sub-2 { font-size: 7px; color: rgba(17,16,8,0.45); margin-top: 6px; line-height: 1.5; }
+  .preview-2 .p-right {
+    background: #D42B2B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .preview-2 .p-bowl-label {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
+  .preview-2 .p-bowl-big {
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: white;
+    line-height: 1;
+  }
+  .preview-2 .p-bowl-sub {
+    font-size: 7px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 3px;
+    letter-spacing: 0.1em;
+  }
+  .preview-2 .p-ticker {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 18px;
+    background: #F2C14E;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .preview-2 .p-ticker span {
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #111008;
+    white-space: nowrap;
+    padding: 0 12px;
+  }
+
+  /* Concept 3 preview — warm editorial */
+  .preview-3 {
+    background: #FAF6EE;
+  }
+  .preview-3 .p-nav {
+    height: 38px;
+    background: rgba(250,246,238,0.95);
+    border-bottom: 1px solid rgba(28,22,14,0.08);
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    justify-content: space-between;
+  }
+  .preview-3 .p-logo-3 {
+    font-family: 'Playfair Display',serif;
+    font-style: italic;
+    font-size: 12px;
+    color: #1C160E;
+  }
+  .preview-3 .p-btn-3 {
+    font-size: 7px;
+    background: #B5312A;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 1px;
+  }
+  .preview-3 .p-body {
+    padding: 16px 14px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+  .preview-3 .p-serif-title {
+    font-family: 'Playfair Display',serif;
+    font-size: 22px;
+    line-height: 1.05;
+    color: #1C160E;
+  }
+  .preview-3 .p-serif-title em { font-style: italic; color: #B5312A; }
+  .preview-3 .p-aside {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 2px;
+  }
+  .preview-3 .p-aside-item {
+    text-align: right;
+  }
+  .preview-3 .p-aside-label { font-size: 6px; letter-spacing: 0.2em; text-transform: uppercase; color: #C49A3C; }
+  .preview-3 .p-aside-val { font-family: 'Playfair Display',serif; font-style: italic; font-size: 9px; color: rgba(28,22,14,0.5); margin-top: 2px; }
+  .preview-3 .p-strip {
+    margin-top: 14px;
+    height: 90px;
+    background: linear-gradient(135deg, #EDE8DC, #D8D0C0);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .preview-3 .p-strip::before {
+    content: '';
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(#D4C4A0, #B8A070);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: absolute;
+    left: 35%;
+    transform: translateX(-50%);
+  }
+  .preview-3 .p-strip-label {
+    position: absolute;
+    bottom: 8px; left: 10px;
+    background: #1C160E;
+    padding: 4px 10px;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 8px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* Hover overlay */
+  .card-preview-overlay {
+    position: absolute; inset: 0;
+    background: rgba(14,11,8,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover .card-preview-overlay { opacity: 1; }
+  .overlay-btn {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 12px 28px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    border-radius: 2px;
+  }
+  .overlay-btn:hover { background: var(--red); border-color: var(--red); }
+
+  /* Card body */
+  .card-body {
+    padding: 28px 28px 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-num {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--cream);
+  }
+
+  .card-vibe {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-style: italic;
+  }
+
+  .card-desc {
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--muted);
+    margin-bottom: 24px;
+    flex: 1;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 2px;
+  }
+
+  .card-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--cream);
+    transition: color 0.3s;
+  }
+  .card-link:hover { color: var(--gold); }
+  .card-link-text {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .card-link-arrow {
+    font-size: 18px;
+    transition: transform 0.3s;
+  }
+  .card:hover .card-link-arrow { transform: translateX(4px); }
+
+  /* Footer note */
+  .footer-note {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+    border-top: 1px solid var(--border);
+    padding-top: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-note-text {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .footer-note-text strong { font-weight: 500; color: rgba(245,239,224,0.7); }
+  .footer-contact {
+    text-align: right;
+  }
+  .footer-contact-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .footer-contact-email {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--gold);
+  }
+
+  @media (max-width: 900px) {
+    header, .concepts, .footer-note { padding-left: 28px; padding-right: 28px; }
+    .cards { grid-template-columns: 1fr; }
+    .header-top { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-note { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-contact { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="from-badge">Website Proposal · Saigon Rolls</div>
+    <div class="date-stamp">March 2026</div>
+  </div>
+
+  <div class="hero-label">Three Design Directions</div>
+  <h1 class="hero-title">
+    Your new website,<br>
+    <em>three ways.</em>
+  </h1>
+  <p class="hero-sub">
+    Each concept below is a fully designed, interactive landing page built specifically 
+    for Saigon Rolls — using your real menu, your story, and your location on King Street. 
+    Click any concept to explore the full page.
+  </p>
+
+  <div class="divider"></div>
+</header>
+
+<section class="concepts">
+  <div class="concepts-label">Select a concept to preview →</div>
+
+  <div class="cards">
+
+    <!-- Concept 1 -->
+    <div class="card">
+      <div class="card-preview preview-1">
+        <div class="p-nav">
+          <span class="p-logo">Saigon Rolls</span>
+          <span class="p-btn">Order</span>
+        </div>
+        <div class="p-hero">
+          <div>
+            <div class="p-eyebrow">Old Town Alexandria</div>
+            <div class="p-title"><span class="p-accent">Phở</span><br>that<br>remembers.</div>
+            <div class="p-sub">Twenty years of Southern Vietnamese craft, now on King Street.</div>
+            <div class="p-cta">Order Now</div>
+          </div>
+          <div class="p-circle">Phở</div>
+        </div>
+        <div class="card-preview-overlay">
+          <a href="saigon-rolls-concept-1.html" target="_blank" class="overlay-btn">Preview →</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-num">Concept 01</div>
+        <div class="card-title">Dark Luxury</div>
+        <div class="card-vibe">Sophisticated · Premium · Memorable</div>
+        <p class="card-desc">
+          Deep black backgrounds, gold accents, and editorial serif typography. 
+          Positions Saigon Rolls as a destination restaurant. Custom cursor, 
+          cinematic hero section, full menu grid. Best for attracting Old Town's 
+          higher-spend dining crowd.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Dark Theme</span>
+          <span class="tag">Gold Accents</span>
+          <span class="tag">Serif Type</span>
+          <span class="tag">Custom Cursor</span>
+        </div>
+        <a href="saigon-rolls-concept-1.html" target="_blank" class="card-link">
+          <span class="card-link-text">Open Concept 1</span>
+          <span class="card-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Concept 2 -->
+    <div class="card">
+      <div class="card-preview preview-2">
+        <div class="p-nav">
+          <span class="p-logo-2">Saigon Rolls</span>
+          <span class="p-btn-2">Order Online ↗</span>
+        </div>
+        <div class="p-split">
+          <div class="p-left">
+            <div class="p-big-title"><span class="r">Real</span><br><em style="font-style:italic;font-size:18px;">Vietnamese.</em><br>Real Good.</div>
+            <div class="p-sub-2">From the family behind Nha Trang at Eden Center — now on King Street.</div>
+          </div>
+          <div class="p-right">
+            <div class="p-bowl-label">
+              <div class="p-bowl-big">PHỞ<br>BÒ</div>
+              <div class="p-bowl-sub">Signature · From $16</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-ticker">
+          <span>Phở Bò · Bánh Mì · Gỏi Cuốn · Chả Giò · Open Daily 11–9PM · 606 King Street ·</span>
+        </div>
+        <div class="card-preview-overlay">
+          <a href="saigon-rolls-concept-2.html" target="_blank" class="overlay-btn">Preview →</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-num">Concept 02</div>
+        <div class="card-title">Bold & Modern</div>
+        <div class="card-vibe">Energetic · Approachable · Eye-catching</div>
+        <p class="card-desc">
+          High contrast red, cream, and yellow. Split-screen hero, scrolling 
+          ticker tape, Bebas Neue display type. Feels fresh and modern without 
+          losing the Vietnamese identity. Strong for King Street foot traffic 
+          and social media sharing.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Light Theme</span>
+          <span class="tag">Split Hero</span>
+          <span class="tag">Ticker Tape</span>
+          <span class="tag">High Energy</span>
+        </div>
+        <a href="saigon-rolls-concept-2.html" target="_blank" class="card-link">
+          <span class="card-link-text">Open Concept 2</span>
+          <span class="card-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Concept 3 -->
+    <div class="card">
+      <div class="card-preview preview-3">
+        <div class="p-nav">
+          <span class="p-logo-3">Saigon Rolls</span>
+          <span class="p-btn-3">Order Online</span>
+        </div>
+        <div class="p-body">
+          <div>
+            <div class="p-serif-title">Southern<br><em>Vietnamese,</em><br>made right.</div>
+          </div>
+          <div class="p-aside">
+            <div class="p-aside-item">
+              <div class="p-aside-label">Location</div>
+              <div class="p-aside-val">606 King St</div>
+            </div>
+            <div class="p-aside-item">
+              <div class="p-aside-label">Hours</div>
+              <div class="p-aside-val">Daily 11–9PM</div>
+            </div>
+          </div>
+        </div>
+        <div class="p-strip">
+          <div class="p-strip-label">Phở Bò Đặc Biệt — From $16</div>
+        </div>
+        <div class="card-preview-overlay">
+          <a href="saigon-rolls-concept-3.html" target="_blank" class="overlay-btn">Preview →</a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-num">Concept 03</div>
+        <div class="card-title">Warm & Refined</div>
+        <div class="card-vibe">Trustworthy · Elegant · Timeless</div>
+        <p class="card-desc">
+          Warm parchment tones, Playfair Display serif, restrained layout with 
+          generous spacing. Leads with the family legacy story. The most 
+          "established" feel — ideal for positioning Saigon Rolls as a trusted 
+          neighborhood institution from day one.
+        </p>
+        <div class="card-tags">
+          <span class="tag">Warm Cream</span>
+          <span class="tag">Story-First</span>
+          <span class="tag">Editorial</span>
+          <span class="tag">Timeless</span>
+        </div>
+        <a href="saigon-rolls-concept-3.html" target="_blank" class="card-link">
+          <span class="card-link-text">Open Concept 3</span>
+          <span class="card-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="footer-note">
+  <div class="footer-note-text">
+    All three concepts use <strong>real menu items, real pricing, and your actual story</strong> — 
+    ready to build on.<br>
+    Each includes a full homepage: hero, menu, about, reviews, location, and online ordering CTA.
+  </div>
+  <div class="footer-contact">
+    <div class="footer-contact-label">Questions?</div>
+    <div class="footer-contact-email">Let's talk →</div>
+  </div>
+</div>
+
+</body>
+</html>
