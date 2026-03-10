@@ -7,1025 +7,230 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --white: #FAFAF5;
-    --black: #111008;
-    --red: #D42B2B;
-    --red-dark: #A01E1E;
-    --yellow: #F2C14E;
-    --green: #2D5A27;
-    --cream: #F5EED8;
-  }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { overflow-x: hidden; width: 100%; max-width: 100vw; }
+img, svg, video { max-width: 100%; display: block; }
 
-  body {
-    background: var(--white);
-    color: var(--black);
-    font-family: 'Libre Baskerville', Georgia, serif;
-    overflow-x: hidden;
-  }
+:root{--white:#FAFAF5;--black:#111008;--red:#D42B2B;--redd:#A01E1E;--yellow:#F2C14E;--cream:#F5EED8;--px:20px;}
+@media(min-width:600px){:root{--px:36px;}}
+@media(min-width:900px){:root{--px:56px;}}
+body{background:var(--white);color:var(--black);font-family:'Libre Baskerville',Georgia,serif;}
 
-  /* ─── NAV ─── */
-  nav {
-    background: var(--black);
-    padding: 0 48px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .nav-badge {
-    width: 36px; height: 36px;
-    background: var(--red);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 14px;
-    color: var(--white);
-    letter-spacing: 0.05em;
-  }
-  .nav-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    letter-spacing: 0.1em;
-    color: var(--white);
-  }
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-  }
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: rgba(250,250,245,0.5);
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--yellow); }
-  .nav-order {
-    background: var(--red);
-    color: var(--white);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border: none;
-    padding: 10px 22px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .nav-order:hover { background: var(--red-dark); }
+/* NAV */
+nav{background:var(--black);padding:0 var(--px);height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.nav-brand{display:flex;align-items:center;gap:9px;}
+.nav-dot{width:28px;height:28px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:11px;color:white;letter-spacing:0.04em;flex-shrink:0;}
+.nav-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.1em;color:white;}
+.nav-links{display:none;list-style:none;gap:26px;}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(250,250,245,0.45);text-decoration:none;text-transform:uppercase;letter-spacing:0.14em;transition:color 0.2s;}
+.nav-links a:hover{color:var(--yellow);}
+.nav-cta{background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;border:none;padding:9px 16px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--redd);}
+@media(min-width:768px){.nav-links{display:flex;}.nav-name{font-size:22px;}}
 
-  /* ─── HERO ─── */
-  .hero {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: calc(100vh - 64px);
-    overflow: hidden;
-  }
+/* HERO — stacked on mobile, split on desktop */
+.hero{min-height:calc(100svh - 56px);display:flex;flex-direction:column;}
+.hero-text{background:var(--cream);padding:48px var(--px) 40px;flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden;}
+/* decorative large letter — clipped inside overflow:hidden parent */
+.hero-text::after{content:'Phở';position:absolute;bottom:-30px;left:-8px;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,35vw,280px);color:rgba(212,43,43,0.05);line-height:1;pointer-events:none;white-space:nowrap;}
+.live-dot{display:flex;align-items:center;gap:8px;margin-bottom:26px;position:relative;z-index:1;}
+.live-circle{width:7px;height:7px;background:var(--red);border-radius:50%;animation:blink 2s ease-in-out infinite;flex-shrink:0;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+.live-text{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,16vw,120px);line-height:0.88;letter-spacing:0.01em;color:var(--black);margin-bottom:22px;position:relative;z-index:1;}
+h1 .r{color:var(--red);}
+h1 .it{font-family:'Libre Baskerville',serif;font-style:italic;font-size:0.7em;display:block;}
+.hero-p{font-size:clamp(14px,2vw,16px);line-height:1.78;color:rgba(17,16,8,0.55);margin-bottom:28px;position:relative;z-index:1;}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:11px;position:relative;z-index:1;}
+.btn-red{background:var(--red);color:white;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;padding:13px 26px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s,transform 0.15s;white-space:nowrap;}
+.btn-red:hover{background:var(--redd);transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--black);border:2px solid var(--black);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;padding:11px 26px;cursor:pointer;text-decoration:none;display:inline-block;transition:background 0.2s,color 0.2s;white-space:nowrap;}
+.btn-outline:hover{background:var(--black);color:white;}
+/* Red panel */
+.hero-red{background:var(--red);padding:40px var(--px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;min-height:180px;}
+.hero-red::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 18px),repeating-linear-gradient(-45deg,rgba(255,255,255,0.04) 0,rgba(255,255,255,0.04) 1px,transparent 1px,transparent 18px);}
+.dish-block{position:relative;z-index:2;text-align:center;}
+.dish-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,11vw,72px);letter-spacing:0.1em;color:white;line-height:1;}
+.dish-sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:13px;color:rgba(255,255,255,0.6);margin-top:5px;}
+.price-badge{display:inline-block;background:var(--yellow);padding:9px 16px;margin-top:14px;transform:rotate(2deg);}
+.price-n{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--black);line-height:1;}
+.price-lbl{font-family:'IBM Plex Mono',monospace;font-size:8px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(17,16,8,0.55);}
+/* steam in red panel */
+.red-steam{position:absolute;top:10px;left:50%;transform:translateX(-50%);display:flex;gap:10px;}
+.rs{height:36px;width:2px;background:rgba(255,255,255,0.35);border-radius:2px;animation:rsteam 2.5s ease-in-out infinite;}
+.rs:nth-child(2){height:24px;animation-delay:0.6s;}.rs:nth-child(3){height:30px;animation-delay:1.2s;}
+@keyframes rsteam{0%{opacity:0;transform:scaleY(0.5) translateY(10px);}50%{opacity:0.5;transform:scaleY(1) translateY(0);}100%{opacity:0;transform:scaleY(0.8) translateY(-10px);}}
+@media(min-width:900px){.hero{flex-direction:row;min-height:calc(100svh - 56px);}.hero-text{flex:1;}.hero-red{flex:0 0 42%;min-height:unset;}}
 
-  .hero-left {
-    background: var(--cream);
-    padding: 80px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
+/* TICKER */
+.ticker{background:var(--yellow);padding:11px 0;overflow:hidden;}
+.ticker-inner{display:flex;animation:tick 22s linear infinite;white-space:nowrap;}
+.ti{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.14em;color:var(--black);padding:0 18px;display:inline-flex;align-items:center;gap:18px;}
+.ti::after{content:'✦';color:var(--red);}
+@keyframes tick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
-  /* Big decorative number */
-  .bg-number {
-    position: absolute;
-    bottom: -60px; left: -20px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 400px;
-    color: rgba(212,43,43,0.06);
-    line-height: 1;
-    pointer-events: none;
-    letter-spacing: -0.05em;
-  }
+/* FEATURES */
+.features{display:grid;grid-template-columns:1fr;border-top:3px solid var(--black);}
+.feat{padding:40px var(--px);border-bottom:1px solid rgba(17,16,8,0.1);position:relative;transition:background 0.3s;}
+.feat:last-child{border-bottom:none;}
+.feat:hover{background:var(--cream);}
+.feat-n{font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(212,43,43,0.06);line-height:1;position:absolute;top:14px;right:var(--px);}
+.feat-ico{font-size:26px;margin-bottom:16px;}
+.feat-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.05em;margin-bottom:11px;color:var(--black);line-height:1;}
+.feat-p{font-size:14px;line-height:1.72;color:rgba(17,16,8,0.52);}
+@media(min-width:600px){.features{grid-template-columns:repeat(3,1fr);}.feat{border-right:1px solid rgba(17,16,8,0.1);border-bottom:none;}.feat:last-child{border-right:none;}}
 
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 40px;
-  }
-  .hero-tag-dot {
-    width: 8px; height: 8px;
-    background: var(--red);
-    border-radius: 50%;
-    animation: blink 2s ease-in-out infinite;
-  }
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-  .hero-tag span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--red);
-  }
+/* MENU */
+.menu-sec{padding:72px var(--px);background:var(--black);}
+.menu-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;flex-wrap:wrap;gap:11px;}
+h2.mh{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,11vw,100px);letter-spacing:0.02em;color:white;line-height:0.9;}
+h2.mh span{color:var(--yellow);}
+.mall{font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.15em;color:rgba(255,255,255,0.35);text-decoration:none;white-space:nowrap;transition:color 0.3s;}
+.mall:hover{color:var(--yellow);}
+.mgrid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,0.05);}
+.mc{background:var(--black);padding:26px var(--px);display:flex;justify-content:space-between;gap:12px;transition:background 0.3s;}
+.mc:hover{background:rgba(212,43,43,0.12);}
+.mc-cat{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--yellow);margin-bottom:9px;}
+.mc-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,5.5vw,38px);letter-spacing:0.04em;color:white;line-height:1;margin-bottom:3px;}
+.mc-viet{font-family:'Libre Baskerville',serif;font-style:italic;font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:8px;}
+.mc-desc{font-size:13px;color:rgba(255,255,255,0.38);line-height:1.62;}
+.mc-price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--yellow);white-space:nowrap;flex-shrink:0;padding-top:2px;}
+@media(min-width:768px){.menu-sec{padding:100px var(--px);}.mgrid{display:grid;grid-template-columns:repeat(2,1fr);}.mc{padding:36px;}}
+@media(min-width:1100px){.mgrid{grid-template-columns:repeat(3,1fr);}}
 
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(80px, 9vw, 130px);
-    line-height: 0.88;
-    letter-spacing: 0.01em;
-    color: var(--black);
-    margin-bottom: 36px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-title .accent { color: var(--red); }
-  .hero-title .italic-word {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-size: 0.75em;
-    display: block;
-    color: var(--black);
-  }
+/* REVIEWS */
+.reviews{padding:72px var(--px);background:var(--cream);}
+.rev-lbl{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.22em;color:var(--red);margin-bottom:13px;}
+h2.rh{font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,8vw,68px);letter-spacing:0.03em;color:var(--black);line-height:0.9;margin-bottom:36px;}
+.rgrid{display:grid;grid-template-columns:1fr;gap:16px;}
+.rc{background:var(--white);padding:28px;border-left:4px solid var(--red);transition:transform 0.2s;}
+.rc:hover{transform:translateY(-3px);}
+.rc-q{font-size:15px;line-height:1.75;color:rgba(17,16,8,0.65);font-style:italic;margin-bottom:18px;}
+.rc-a{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.15em;color:var(--red);}
+@media(min-width:600px){.reviews{padding:100px var(--px);}.rgrid{grid-template-columns:repeat(3,1fr);}}
 
-  .hero-sub {
-    font-size: 17px;
-    line-height: 1.75;
-    color: rgba(17,16,8,0.6);
-    max-width: 380px;
-    margin-bottom: 48px;
-    font-weight: 400;
-    position: relative; z-index: 1;
-  }
+/* LOCATION */
+.loc-wrap{display:flex;flex-direction:column;}
+.loc-info{background:var(--red);padding:60px var(--px);position:relative;overflow:hidden;}
+.loc-info::after{content:'606';position:absolute;right:-16px;bottom:-40px;font-family:'Bebas Neue',sans-serif;font-size:clamp(120px,28vw,220px);color:rgba(255,255,255,0.05);line-height:1;pointer-events:none;}
+.loc-label{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.22em;color:rgba(255,255,255,0.45);margin-bottom:18px;}
+.loc-addr{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,10vw,68px);letter-spacing:0.03em;color:white;line-height:1.05;margin-bottom:24px;position:relative;z-index:1;}
+.loc-details{display:flex;flex-direction:column;gap:9px;margin-bottom:32px;position:relative;z-index:1;}
+.ld{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.09em;color:rgba(255,255,255,0.65);display:flex;align-items:center;gap:9px;}
+.ld::before{content:'→';color:var(--yellow);flex-shrink:0;}
+.ld a{color:rgba(255,255,255,0.65);text-decoration:none;}
+.btn-white{display:inline-block;background:white;color:var(--red);font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:13px 28px;text-decoration:none;transition:background 0.2s,transform 0.15s;position:relative;z-index:1;}
+.btn-white:hover{background:var(--yellow);transform:translateY(-2px);}
+.loc-map{background:#E8E4DC;min-height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:9px;position:relative;overflow:hidden;}
+.loc-map::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(17,16,8,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(17,16,8,0.06) 1px,transparent 1px);background-size:34px 34px;}
+.map-pin{font-size:44px;position:relative;z-index:1;animation:pin 2s ease-in-out infinite;}
+@keyframes pin{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.map-txt{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(17,16,8,0.35);position:relative;z-index:1;}
+@media(min-width:768px){.loc-wrap{flex-direction:row;}.loc-info{flex:1;}.loc-map{flex:0 0 38%;min-height:auto;}}
 
-  .hero-cta-group {
-    display: flex;
-    gap: 16px;
-    position: relative; z-index: 1;
-  }
-  .btn-red {
-    background: var(--red);
-    color: var(--white);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 16px 36px;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
-  .btn-outline {
-    background: transparent;
-    color: var(--black);
-    border: 2px solid var(--black);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 14px 36px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.2s, color 0.2s, transform 0.15s;
-  }
-  .btn-outline:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
+/* STICKY */
+.sticky{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--red);display:flex;align-items:center;justify-content:center;padding:13px var(--px);gap:8px;box-shadow:0 -4px 18px rgba(0,0,0,0.3);}
+.sticky a{color:white;text-decoration:none;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;}
+.sdiv{width:1px;height:13px;background:rgba(255,255,255,0.3);flex-shrink:0;}
+@media(min-width:768px){.sticky{display:none;}}
 
-  .hero-right {
-    background: var(--red);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  /* Pattern background */
-  .hero-pattern {
-    position: absolute; inset: 0;
-    background-image: 
-      repeating-linear-gradient(
-        45deg,
-        rgba(255,255,255,0.04) 0px,
-        rgba(255,255,255,0.04) 1px,
-        transparent 1px,
-        transparent 20px
-      ),
-      repeating-linear-gradient(
-        -45deg,
-        rgba(255,255,255,0.04) 0px,
-        rgba(255,255,255,0.04) 1px,
-        transparent 1px,
-        transparent 20px
-      );
-  }
-
-  /* Central dish display */
-  .dish-display {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 60px;
-  }
-
-  /* Big pho bowl CSS art */
-  .pho-art {
-    width: 280px; height: 280px;
-    margin: 0 auto 40px;
-    position: relative;
-  }
-  .bowl-outer {
-    width: 280px; height: 140px;
-    border-radius: 0 0 140px 140px;
-    background: linear-gradient(135deg, #F5E6C8, #E8D4A0, #D4B870);
-    position: absolute;
-    bottom: 0;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3), inset 0 -10px 30px rgba(0,0,0,0.15);
-  }
-  .bowl-rim {
-    width: 280px; height: 30px;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #F0E0B0, #C8A860);
-    position: absolute;
-    top: 110px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-  .broth {
-    width: 240px; height: 30px;
-    border-radius: 50%;
-    background: linear-gradient(to bottom, #8B4513, #6B2E0A);
-    position: absolute;
-    top: 114px; left: 20px;
-    opacity: 0.85;
-  }
-  .noodle-pile {
-    width: 200px; height: 60px;
-    position: absolute;
-    top: 60px; left: 40px;
-    overflow: hidden;
-  }
-  .noodle {
-    height: 4px;
-    border-radius: 2px;
-    background: #F5E6C8;
-    position: absolute;
-    opacity: 0.9;
-  }
-  /* Herb circles */
-  .herb {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    position: absolute;
-    top: 70px;
-  }
-  .steam-art {
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-  }
-  .steam-art-line {
-    width: 3px;
-    border-radius: 2px;
-    background: rgba(255,255,255,0.6);
-    margin: 0 8px;
-    display: inline-block;
-    animation: steamRise 2.5s ease-in-out infinite;
-  }
-  @keyframes steamRise {
-    0% { opacity: 0; transform: scaleY(0.5) translateY(20px); }
-    50% { opacity: 0.7; transform: scaleY(1) translateY(0); }
-    100% { opacity: 0; transform: scaleY(0.8) translateY(-20px); }
-  }
-  .steam-art-line:nth-child(1) { height: 50px; animation-delay: 0s; }
-  .steam-art-line:nth-child(2) { height: 70px; animation-delay: 0.6s; }
-  .steam-art-line:nth-child(3) { height: 55px; animation-delay: 1.2s; }
-
-  .dish-label {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
-    letter-spacing: 0.1em;
-    color: var(--white);
-    line-height: 1;
-  }
-  .dish-sublabel {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: rgba(255,255,255,0.6);
-    margin-top: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  /* Price tag */
-  .price-tag {
-    position: absolute;
-    bottom: 60px; right: 60px;
-    background: var(--yellow);
-    padding: 16px 20px;
-    transform: rotate(3deg);
-  }
-  .price-tag-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--black);
-    line-height: 1;
-  }
-  .price-tag-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(17,16,8,0.6);
-  }
-
-  /* Stamp */
-  .stamp {
-    position: absolute;
-    top: 60px; left: 60px;
-    width: 90px; height: 90px;
-    border: 3px solid rgba(255,255,255,0.3);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transform: rotate(-12deg);
-  }
-  .stamp-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(255,255,255,0.6);
-    text-align: center;
-    line-height: 1.6;
-  }
-
-  /* ─── TICKER ─── */
-  .ticker {
-    background: var(--yellow);
-    padding: 14px 0;
-    overflow: hidden;
-    position: relative;
-  }
-  .ticker-inner {
-    display: flex;
-    gap: 0;
-    animation: tickerScroll 20s linear infinite;
-    white-space: nowrap;
-  }
-  .ticker-item {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 16px;
-    letter-spacing: 0.15em;
-    color: var(--black);
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    gap: 24px;
-  }
-  .ticker-item::after {
-    content: '✦';
-    color: var(--red);
-  }
-  @keyframes tickerScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* ─── FEATURES ─── */
-  .features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    border-top: 3px solid var(--black);
-  }
-
-  .feature {
-    padding: 64px 52px;
-    border-right: 1px solid rgba(17,16,8,0.1);
-    transition: background 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  .feature:last-child { border-right: none; }
-  .feature:hover { background: var(--cream); }
-
-  .feature-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 80px;
-    color: rgba(212,43,43,0.08);
-    line-height: 1;
-    position: absolute;
-    top: 20px; right: 24px;
-    transition: color 0.3s;
-  }
-  .feature:hover .feature-num { color: rgba(212,43,43,0.15); }
-  .feature-icon {
-    font-size: 32px;
-    margin-bottom: 24px;
-  }
-  .feature-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 0.05em;
-    margin-bottom: 16px;
-    color: var(--black);
-    line-height: 1;
-  }
-  .feature-text {
-    font-size: 15px;
-    line-height: 1.7;
-    color: rgba(17,16,8,0.55);
-  }
-
-  /* ─── MENU SHOWCASE ─── */
-  .menu-showcase {
-    padding: 100px 0 0;
-    background: var(--black);
-    overflow: hidden;
-  }
-
-  .menu-showcase-header {
-    padding: 0 52px 72px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-  .menu-showcase-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(64px, 8vw, 120px);
-    letter-spacing: 0.02em;
-    color: var(--white);
-    line-height: 0.9;
-  }
-  .menu-showcase-title span { color: var(--yellow); }
-
-  .menu-carousel {
-    display: flex;
-    gap: 2px;
-    overflow-x: auto;
-    padding: 0 52px 60px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .menu-carousel::-webkit-scrollbar { display: none; }
-
-  .menu-card {
-    min-width: 320px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 48px 36px;
-    flex-shrink: 0;
-    position: relative;
-    overflow: hidden;
-    transition: background 0.3s, border-color 0.3s;
-    cursor: pointer;
-  }
-  .menu-card:hover {
-    background: rgba(212,43,43,0.15);
-    border-color: rgba(212,43,43,0.4);
-  }
-  .menu-card-cat {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.25em;
-    color: var(--yellow);
-    margin-bottom: 28px;
-  }
-  .menu-card-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 8px;
-  }
-  .menu-card-viet {
-    font-family: 'Libre Baskerville', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 24px;
-  }
-  .menu-card-desc {
-    font-size: 14px;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.65;
-    margin-bottom: 36px;
-  }
-  .menu-card-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 24px;
-  }
-  .menu-card-price {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--yellow);
-    letter-spacing: 0.05em;
-  }
-  .menu-card-arrow {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.4);
-    font-size: 16px;
-    transition: all 0.3s;
-  }
-  .menu-card:hover .menu-card-arrow {
-    background: var(--red);
-    border-color: var(--red);
-    color: white;
-  }
-
-  /* ─── SOCIAL PROOF ─── */
-  .social-proof {
-    background: var(--cream);
-    padding: 100px 52px;
-  }
-  .proof-header {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    margin-bottom: 64px;
-  }
-  .proof-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
-    letter-spacing: 0.05em;
-    color: var(--black);
-  }
-  .proof-stars {
-    display: flex;
-    gap: 4px;
-    font-size: 20px;
-  }
-  .proof-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-  .proof-card {
-    background: var(--white);
-    padding: 36px;
-    border-left: 4px solid var(--red);
-    transition: transform 0.2s;
-  }
-  .proof-card:hover { transform: translateY(-4px); }
-  .proof-quote {
-    font-size: 16px;
-    line-height: 1.75;
-    color: rgba(17,16,8,0.7);
-    font-style: italic;
-    margin-bottom: 24px;
-  }
-  .proof-author {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--red);
-  }
-
-  /* ─── LOCATION ─── */
-  .location-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    min-height: 500px;
-  }
-  .location-info {
-    background: var(--red);
-    padding: 80px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .location-info::before {
-    content: '606';
-    position: absolute;
-    right: -20px; bottom: -60px;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 250px;
-    color: rgba(255,255,255,0.05);
-    line-height: 1;
-  }
-  .location-label {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 24px;
-  }
-  .location-address {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
-    letter-spacing: 0.05em;
-    color: var(--white);
-    line-height: 1.05;
-    margin-bottom: 32px;
-    position: relative;
-  }
-  .location-details {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 48px;
-  }
-  .location-detail {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.7);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .location-detail::before {
-    content: '→';
-    color: var(--yellow);
-  }
-  .btn-white {
-    display: inline-block;
-    background: var(--white);
-    color: var(--red);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 16px 36px;
-    text-decoration: none;
-    align-self: flex-start;
-    transition: background 0.2s, transform 0.15s;
-    position: relative;
-  }
-  .btn-white:hover { background: var(--yellow); transform: translateY(-2px); }
-
-  .location-map {
-    background: #E8E4DC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .map-placeholder {
-    text-align: center;
-  }
-  .map-pin {
-    font-size: 64px;
-    display: block;
-    margin-bottom: 16px;
-    animation: pinBounce 2s ease-in-out infinite;
-  }
-  @keyframes pinBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-  .map-text {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(17,16,8,0.4);
-  }
-  /* Grid overlay */
-  .location-map::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(17,16,8,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(17,16,8,0.06) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--black);
-    padding: 60px 52px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 3px solid var(--red);
-  }
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .footer-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: 0.1em;
-    color: var(--white);
-  }
-  .footer-tagline {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(250,250,245,0.35);
-  }
-  .footer-right {
-    display: flex;
-    gap: 32px;
-    align-items: center;
-  }
-  .footer-right a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(250,250,245,0.35);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-right a:hover { color: var(--yellow); }
+/* FOOTER */
+footer{background:var(--black);padding:40px var(--px) 80px;display:flex;flex-direction:column;gap:18px;border-top:3px solid var(--red);}
+.f-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.1em;color:white;}
+.f-tag{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(250,250,245,0.25);}
+.flinks{display:flex;flex-wrap:wrap;gap:18px;}
+.flinks a{font-family:'IBM Plex Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.16em;color:rgba(250,250,245,0.3);text-decoration:none;transition:color 0.2s;}
+.flinks a:hover{color:var(--yellow);}
+@media(min-width:768px){footer{flex-direction:row;justify-content:space-between;align-items:center;padding-bottom:40px;}}
 </style>
 </head>
 <body>
-
-<!-- Nav -->
 <nav>
-  <div class="nav-brand">
-    <div class="nav-badge">SR</div>
-    <span class="nav-name">Saigon Rolls</span>
-  </div>
-  <div class="nav-right">
-    <ul class="nav-links">
-      <li><a href="#">Menu</a></li>
-      <li><a href="#">Our Story</a></li>
-      <li><a href="#">Location</a></li>
-    </ul>
-    <button class="nav-order">Order Online ↗</button>
-  </div>
+  <div class="nav-brand"><div class="nav-dot">SR</div><span class="nav-name">Saigon Rolls</span></div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#story">Story</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <a href="#" class="nav-cta">Order ↗</a>
 </nav>
-
-<!-- Hero -->
 <section class="hero">
-  <div class="hero-left">
-    <span class="bg-number">Phở</span>
-    <div class="hero-tag">
-      <div class="hero-tag-dot"></div>
-      <span>Now Open · Old Town Alexandria</span>
-    </div>
-    <h1 class="hero-title">
-      <span class="accent">Real</span><br>
-      <span class="italic-word">Vietnamese.</span><br>
-      Real Good.
-    </h1>
-    <p class="hero-sub">
-      From the family behind Nha Trang at Eden Center — 20 years of craft, 
-      now at 606 King Street. Phở, bánh mì, and house specialties made 
-      the way they're meant to be.
-    </p>
-    <div class="hero-cta-group">
+  <div class="hero-text">
+    <div class="live-dot"><div class="live-circle"></div><span class="live-text">Now Open · Old Town Alexandria</span></div>
+    <h1><span class="r">Real</span><span class="it">Vietnamese.</span>Real Good.</h1>
+    <p class="hero-p">From the family behind Nha Trang at Eden Center — 20 years of craft, now at 606 King Street. Phở, bánh mì, and house specialties made the way they're meant to be.</p>
+    <div class="hero-ctas">
       <a href="#" class="btn-red">Order Online ↗</a>
-      <a href="#" class="btn-outline">View Full Menu</a>
+      <a href="#menu" class="btn-outline">View Menu</a>
     </div>
   </div>
-
-  <div class="hero-right">
-    <div class="hero-pattern"></div>
-    <div class="stamp">
-      <div class="stamp-text">Est.<br>2025<br>Old Town<br>ALX</div>
-    </div>
-    <div class="dish-display">
-      <div class="pho-art">
-        <!-- Steam -->
-        <div class="steam-art">
-          <span class="steam-art-line"></span>
-          <span class="steam-art-line"></span>
-          <span class="steam-art-line"></span>
-        </div>
-        <!-- Bowl -->
-        <div class="bowl-rim"></div>
-        <div class="broth"></div>
-        <div class="bowl-outer"></div>
-        <!-- Herb decoration dots -->
-        <div class="herb" style="background:#2D5A27;left:80px;"></div>
-        <div class="herb" style="background:#7DB87D;left:110px;top:65px;"></div>
-        <div class="herb" style="background:#2D5A27;left:170px;"></div>
-      </div>
-      <div class="dish-label">PHỞ BÒ</div>
-      <div class="dish-sublabel">Signature Beef Noodle Soup</div>
-    </div>
-    <div class="price-tag">
-      <div class="price-tag-price">$16</div>
-      <div class="price-tag-label">From</div>
+  <div class="hero-red">
+    <div class="red-steam"><div class="rs"></div><div class="rs"></div><div class="rs"></div></div>
+    <div class="dish-block">
+      <div class="dish-title">PHỞ BÒ</div>
+      <div class="dish-sub">Signature Beef Noodle Soup</div>
+      <div class="price-badge"><div class="price-n">$16</div><div class="price-lbl">From</div></div>
     </div>
   </div>
 </section>
-
-<!-- Ticker -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span class="ticker-item">Phở Bò</span>
-    <span class="ticker-item">Bánh Mì</span>
-    <span class="ticker-item">Gỏi Cuốn</span>
-    <span class="ticker-item">Chả Giò</span>
-    <span class="ticker-item">Bánh Xèo</span>
-    <span class="ticker-item">Bún Thịt Nướng</span>
-    <span class="ticker-item">Open Daily 11–9PM</span>
-    <span class="ticker-item">606 King Street</span>
-    <span class="ticker-item">Online Ordering</span>
-    <!-- Duplicate for infinite scroll -->
-    <span class="ticker-item">Phở Bò</span>
-    <span class="ticker-item">Bánh Mì</span>
-    <span class="ticker-item">Gỏi Cuốn</span>
-    <span class="ticker-item">Chả Giò</span>
-    <span class="ticker-item">Bánh Xèo</span>
-    <span class="ticker-item">Bún Thịt Nướng</span>
-    <span class="ticker-item">Open Daily 11–9PM</span>
-    <span class="ticker-item">606 King Street</span>
-    <span class="ticker-item">Online Ordering</span>
+    <span class="ti">Phở Bò</span><span class="ti">Bánh Mì</span><span class="ti">Gỏi Cuốn</span><span class="ti">Chả Giò</span><span class="ti">Bánh Xèo</span><span class="ti">Open Daily 11–9PM</span><span class="ti">606 King Street</span><span class="ti">Order Online</span>
+    <span class="ti">Phở Bò</span><span class="ti">Bánh Mì</span><span class="ti">Gỏi Cuốn</span><span class="ti">Chả Giò</span><span class="ti">Bánh Xèo</span><span class="ti">Open Daily 11–9PM</span><span class="ti">606 King Street</span><span class="ti">Order Online</span>
   </div>
 </div>
-
-<!-- Features -->
-<section class="features">
-  <div class="feature">
-    <div class="feature-num">01</div>
-    <div class="feature-icon">🍜</div>
-    <h3 class="feature-title">20 Years of Craft</h3>
-    <p class="feature-text">The same family, the same broths, the same commitment to Southern Vietnamese cuisine — from Nha Trang at Eden Center to Old Town.</p>
+<section class="features" id="story">
+  <div class="feat"><div class="feat-n">01</div><div class="feat-ico">🍜</div><h3 class="feat-title">20 Years of Craft</h3><p class="feat-p">The same family, the same broths, the same commitment to Southern Vietnamese cuisine — from Nha Trang at Eden Center to Old Town.</p></div>
+  <div class="feat"><div class="feat-n">02</div><div class="feat-ico">📱</div><h3 class="feat-title">Order Online</h3><p class="feat-p">Skip the wait. Order directly for pickup or delivery. Fresh, made-to-order Vietnamese cuisine ready when you are.</p></div>
+  <div class="feat"><div class="feat-n">03</div><div class="feat-ico">🌿</div><h3 class="feat-title">Fresh Daily</h3><p class="feat-p">Broth simmered from scratch. Herbs sourced fresh. Gluten-free options clearly marked. Real ingredients, honest cooking.</p></div>
+</section>
+<section class="menu-sec" id="menu">
+  <div class="menu-hd">
+    <h2 class="mh">Our<br><span>Menu</span></h2>
+    <a href="#" class="mall">Full Menu →</a>
   </div>
-  <div class="feature">
-    <div class="feature-num">02</div>
-    <div class="feature-icon">📱</div>
-    <h3 class="feature-title">Order Online</h3>
-    <p class="feature-text">Skip the wait. Order directly through our website for pickup or dine in. Fresh, made-to-order Vietnamese cuisine ready when you are.</p>
-  </div>
-  <div class="feature">
-    <div class="feature-num">03</div>
-    <div class="feature-icon">🌿</div>
-    <h3 class="feature-title">Fresh, Daily</h3>
-    <p class="feature-text">Broth simmered from scratch. Herbs sourced fresh. Gluten-free options clearly marked. Real ingredients, honest cooking.</p>
+  <div class="mgrid">
+    <div class="mc"><div><div class="mc-cat">★ Signature</div><div class="mc-name">Beef Phở</div><div class="mc-viet">Phở Bò Đặc Biệt</div><p class="mc-desc">Slow-simmered bone broth, star anise, eye of round, brisket, tendon & meatballs. Fresh herbs & lime.</p></div><div class="mc-price">$16+</div></div>
+    <div class="mc"><div><div class="mc-cat">★ Signature</div><div class="mc-name">Bánh Mì</div><div class="mc-viet">Bánh Mì Đặc Biệt</div><p class="mc-desc">Crispy baguette with house-pickled daikon, cilantro, jalapeños, and slow-roasted pork.</p></div><div class="mc-price">$12+</div></div>
+    <div class="mc"><div><div class="mc-cat">★ Signature</div><div class="mc-name">Saigon Crêpe</div><div class="mc-viet">Bánh Xèo</div><p class="mc-desc">Sizzling turmeric crêpe with shrimp, pork & bean sprouts. Wrap in lettuce, dip in nuoc cham.</p></div><div class="mc-price">$18</div></div>
+    <div class="mc"><div><div class="mc-cat">🌿 Vegetarian</div><div class="mc-name">Summer Rolls</div><div class="mc-viet">Gỏi Cuốn</div><p class="mc-desc">Fresh rice paper rolls with vermicelli, herbs, and shrimp or tofu. Peanut sauce.</p></div><div class="mc-price">$7</div></div>
+    <div class="mc"><div><div class="mc-cat">🌾 Gluten-Free</div><div class="mc-name">Vermicelli Bowl</div><div class="mc-viet">Bún Thịt Nướng</div><p class="mc-desc">Grilled lemongrass pork over cold rice vermicelli with pickled daikon, peanuts & fish sauce.</p></div><div class="mc-price">$15</div></div>
+    <div class="mc"><div><div class="mc-cat">Appetizer</div><div class="mc-name">Spring Rolls</div><div class="mc-viet">Chả Giò</div><p class="mc-desc">Crispy fried rolls with ground pork, glass noodles & mushrooms. Peanut dipping sauce.</p></div><div class="mc-price">$7</div></div>
   </div>
 </section>
-
-<!-- Menu Showcase -->
-<section class="menu-showcase">
-  <div class="menu-showcase-header">
-    <h2 class="menu-showcase-title">Our<br><span>Menu</span></h2>
-    <a href="#" style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-decoration:none;display:flex;align-items:center;gap:10px;">
-      Full Menu <span style="color:var(--yellow)">→</span>
-    </a>
-  </div>
-
-  <div class="menu-carousel">
-    <div class="menu-card">
-      <div class="menu-card-cat">★ Signature</div>
-      <h3 class="menu-card-name">Beef Phở</h3>
-      <div class="menu-card-viet">Phở Bò Đặc Biệt</div>
-      <p class="menu-card-desc">Slow-simmered bone broth with star anise, cinnamon, and cloves. Eye of round, brisket, tendon & meatballs. Fresh herbs, bean sprouts, lime.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$16+</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-card-cat">★ Signature</div>
-      <h3 class="menu-card-name">Bánh Mì</h3>
-      <div class="menu-card-viet">Bánh Mì Đặc Biệt</div>
-      <p class="menu-card-desc">Crispy French baguette with house-pickled daikon & carrots, cilantro, jalapeños, and slow-roasted pork with house aioli.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$12+</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-card-cat">★ Signature</div>
-      <h3 class="menu-card-name">Saigon Crêpe</h3>
-      <div class="menu-card-viet">Bánh Xèo</div>
-      <p class="menu-card-desc">Sizzling golden turmeric crêpe with shrimp, pork, and bean sprouts. Wrap in lettuce with herbs, dip in house nuoc cham.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$18</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-card-cat">🌿 Vegetarian</div>
-      <h3 class="menu-card-name">Summer Rolls</h3>
-      <div class="menu-card-viet">Gỏi Cuốn</div>
-      <p class="menu-card-desc">Fresh rice paper rolls with vermicelli, herbs, and your choice of shrimp, pork, or tofu. Served with creamy peanut sauce.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$7</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-card-cat">🌾 Gluten-Free</div>
-      <h3 class="menu-card-name">Vermicelli Bowl</h3>
-      <div class="menu-card-viet">Bún Thịt Nướng</div>
-      <p class="menu-card-desc">Grilled lemongrass pork over cold rice vermicelli with pickled daikon, crushed peanuts, fried shallots, and house fish sauce.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$15</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
-    <div class="menu-card">
-      <div class="menu-card-cat">Appetizer</div>
-      <h3 class="menu-card-name">Spring Rolls</h3>
-      <div class="menu-card-viet">Chả Giò</div>
-      <p class="menu-card-desc">Crispy fried rolls with ground pork, glass noodles, wood ear mushrooms, and water chestnuts. Peanut dipping sauce on the side.</p>
-      <div class="menu-card-bottom">
-        <div class="menu-card-price">$7</div>
-        <div class="menu-card-arrow">→</div>
-      </div>
-    </div>
+<section class="reviews">
+  <div class="rev-lbl">From Our Guests</div>
+  <h2 class="rh">What Old Town<br>Is Saying</h2>
+  <div class="rgrid">
+    <div class="rc"><p class="rc-q">"The broth was incredible — rich, complex, and made with real care. Best pho I've had outside of Eden Center."</p><div class="rc-a">Yelp Review · Old Town</div></div>
+    <div class="rc"><p class="rc-q">"Pork bánh mì was excellent — the bread was perfectly crispy and the meat some of the best I've had in a sandwich."</p><div class="rc-a">Google Review · Alexandria</div></div>
+    <div class="rc"><p class="rc-q">"Warm, cozy interior and helpful staff. A perfect stop before a show at the Little Theater of Alexandria."</p><div class="rc-a">Yelp Review · Alexandria</div></div>
   </div>
 </section>
-
-<!-- Social Proof -->
-<section class="social-proof">
-  <div class="proof-header">
-    <h2 class="proof-title">What People Say</h2>
-    <div class="proof-stars">⭐⭐⭐⭐⭐</div>
-  </div>
-  <div class="proof-grid">
-    <div class="proof-card">
-      <p class="proof-quote">"The broth was absolutely incredible — rich, complex, and clearly made with care. Best pho I've had outside of Eden Center."</p>
-      <div class="proof-author">— Yelp Review · Old Town</div>
-    </div>
-    <div class="proof-card">
-      <p class="proof-quote">"Cheap pork bánh mì was excellent. The bread was crispy and perfectly fresh, and the meat was some of the best I've had."</p>
-      <div class="proof-author">— Google Review · Alexandria</div>
-    </div>
-    <div class="proof-card">
-      <p class="proof-quote">"Warm, cozy wooden interior. Friendly staff who explained everything. Perfect stop before a show at the Little Theater."</p>
-      <div class="proof-author">— Yelp Review · Alexandria</div>
-    </div>
-  </div>
-</section>
-
-<!-- Location -->
-<section class="location-section">
-  <div class="location-info">
-    <div class="location-label">Find Us</div>
-    <div class="location-address">606<br>King<br>Street</div>
-    <div class="location-details">
-      <div class="location-detail">Alexandria, VA 22314</div>
-      <div class="location-detail">(703) 721-3110</div>
-      <div class="location-detail">Open Daily · 11AM – 9PM</div>
-      <div class="location-detail">Dine In · Takeout · Delivery</div>
+<div class="loc-wrap" id="location">
+  <div class="loc-info">
+    <div class="loc-label">Find Us</div>
+    <div class="loc-addr">606<br>King<br>Street</div>
+    <div class="loc-details">
+      <div class="ld">Old Town Alexandria, VA 22314</div>
+      <div class="ld"><a href="tel:7037213110">(703) 721-3110</a></div>
+      <div class="ld">Open Daily · 11AM – 9PM</div>
+      <div class="ld">Dine In · Takeout · Delivery</div>
     </div>
     <a href="#" class="btn-white">Get Directions ↗</a>
   </div>
-  <div class="location-map">
-    <div class="map-placeholder">
-      <span class="map-pin">📍</span>
-      <div class="map-text">Old Town · King Street</div>
-    </div>
-  </div>
-</section>
-
-<!-- Footer -->
+  <div class="loc-map"><div class="map-pin">📍</div><div class="map-txt">Old Town · King Street</div></div>
+</div>
 <footer>
-  <div class="footer-brand">
-    <div>
-      <div class="footer-logo">Saigon Rolls</div>
-      <div class="footer-tagline">Authentic Vietnamese · Old Town Alexandria</div>
-    </div>
-  </div>
-  <div class="footer-right">
-    <a href="#">Instagram</a>
-    <a href="#">Facebook</a>
-    <a href="#">Order Online</a>
-    <a href="#">saigonrolls.biz</a>
-  </div>
+  <div><div class="f-logo">Saigon Rolls</div><div class="f-tag">Authentic Vietnamese · Old Town Alexandria</div></div>
+  <div class="flinks"><a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Order Online</a></div>
 </footer>
-
+<div class="sticky">
+  <a href="tel:7037213110">📞 Call</a><div class="sdiv"></div>
+  <a href="#">🛒 Order</a><div class="sdiv"></div>
+  <a href="#location">📍 Map</a>
+</div>
 </body>
 </html>
